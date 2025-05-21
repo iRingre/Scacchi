@@ -1,2 +1,3 @@
 # Scacchi
-Gioco di scacchi 
+Gioco di scacchi.
+DEMO: https://iringre.github.io/Scacchi/
