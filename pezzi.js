@@ -22,7 +22,7 @@ class Pezzo {
     let mosse = [];
     // Solo pedoni per ora
     if (this.tipo === "♟" || this.tipo === "♙") {
-      let dir = this.colore === "♙" ? -1 : 1;
+      let dir = this.colore === "bianco" ? -1 : 1;
       let nuovaR = this.r + dir;
       if (nuovaR >= 0 && nuovaR < DIM && !board[nuovaR][this.c]) {
         mosse.push([nuovaR, this.c]);
