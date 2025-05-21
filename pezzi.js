@@ -26,8 +26,8 @@ class Pezzo {
       let nuovaR = this.r + dir;
       if (nuovaR >= 0 && nuovaR < DIM && !board[nuovaR][this.c]) {
         mosse.push([nuovaR, this.c]);
-        if(this.r === 1)mosse.push([nuovaR+1, this.c]);
-        if(this.r === 6)mosse.push([nuovaR-1, this.c]);
+        if(this.r === 1 && this.tipo === "♟")mosse.push([nuovaR+1, this.c]);
+        if(this.r === 6 && this.tipo === "♙")mosse.push([nuovaR-1, this.c]);
       }
     }
     if(this.tipo === "♘" || this.tipo === "♞") {
