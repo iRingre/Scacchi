@@ -9,21 +9,21 @@ function setup() {
 
   // Inserimento pedoni
   for (let c = 0; c < DIM; c++) {
-    board[1][c] = new Pezzo("P", "nero", 1, c);
-    board[6][c] = new Pezzo("P", "bianco", 6, c);
+    board[1][c] = new Pezzo("♙", "nero", 1, c);
+    board[6][c] = new Pezzo("♟", "bianco", 6, c);
   }
   // Inserimento cavalli
-  board[0][1] = new Pezzo("C", "nero", 0, 1);
-  board[0][6] = new Pezzo("C", "nero", 0, 6);
-  board[7][1] = new Pezzo("C", "bianco", 7, 1);
-  board[7][6] = new Pezzo("C", "bianco", 7, 6);
+  board[0][1] = new Pezzo("♘", "nero", 0, 1);
+  board[0][6] = new Pezzo("♘", "nero", 0, 6);
+  board[7][1] = new Pezzo("♞", "bianco", 7, 1);
+  board[7][6] = new Pezzo("♞", "bianco", 7, 6);
 }
 
 function draw() {
   background(255);
   for (let r = 0; r < DIM; r++) {
     for (let c = 0; c < DIM; c++) {
-      if ((r + c) % 2 === 0) fill(240);
+      if ((r + c) % 2 === 0) fill(200);
       else fill(100);
       rect(c * TILE_SIZE, r * TILE_SIZE, TILE_SIZE, TILE_SIZE);
 
