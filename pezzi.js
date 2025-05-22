@@ -27,7 +27,7 @@ class Pezzo {
       if (nuovaR >= 0 && nuovaR < DIM && !board[nuovaR][this.c]) {
         mosse.push([nuovaR, this.c]);
         if(this.r === 1 && this.colore === "nero")mosse.push([nuovaR+1, this.c]);
-        if(this.r === 6 && this.tipo === "bianco")mosse.push([nuovaR-1, this.c]);
+        if(this.r === 6 && this.colore === "bianco")mosse.push([nuovaR-1, this.c]);
         console.log("mosse valide", mosse);
       }
     }
@@ -53,16 +53,26 @@ class Pezzo {
 
     if(this.tipo === "♖" || this.tipo === "♜") {
       let nuovaR = this.r;
-        for (let i = 1; i < (DIM-this.r); i++) {
-          nuovaR = this.r+i;
-          if(board[nuovaR][this.c]==null || board[nuovaR][this.c].colore!=this.colore) {
-            mosse.push([nuovaR, this.c]);
-            console.log("mosse", mosse);
-          }
-          if(board[nuovaR][this.c]!= null && board[nuovaR][this.c].colore==this.colore) {
-            break
-          }
+      for (let i = 1; i < (DIM-this.r); i++) {
+        nuovaR = this.r+i;
+        if(board[nuovaR][this.c]==null || board[nuovaR][this.c].colore!=this.colore) {
+          mosse.push([nuovaR, this.c]);
+          console.log("mosse", mosse);
         }
+        if(board[nuovaR][this.c]!= null) {
+          break
+        }
+      }
+      for (let i = 1; i < this.r+1; i++) {
+        nuovaR = this.r-i;
+        if(board[nuovaR][this.c]==null || board[nuovaR][this.c].colore!=this.colore) {
+          mosse.push([nuovaR, this.c]);
+          console.log("mosse", mosse);
+        }
+        if(board[nuovaR][this.c]!= null) {
+          break
+        }
+      }
 
     }
     return mosse;
