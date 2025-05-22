@@ -17,6 +17,12 @@ function setup() {
   board[0][6] = new Pezzo("♘", "nero", 0, 6);
   board[7][1] = new Pezzo("♞", "bianco", 7, 1);
   board[7][6] = new Pezzo("♞", "bianco", 7, 6);
+
+  //inserimento torri
+  board[0][0] = new Pezzo("♖", "nero", 0, 0);
+  board[0][7] = new Pezzo("♖", "nero", 0, 7);
+  board[7][0] = new Pezzo("♜", "bianco", 7, 0);
+  board[7][7] = new Pezzo("♜", "bianco", 7, 7);
 }
 
 function draw() {
