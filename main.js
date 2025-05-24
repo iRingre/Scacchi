@@ -60,9 +60,15 @@ function draw() {
   }
 
   if (selected) {
-    fill(0, 255, 0, 100);
+    
     for (let [r , c] of selected.mosseValide()) {
-      rect(c * TILE_SIZE, r * TILE_SIZE, TILE_SIZE, TILE_SIZE);
+      if(board[r][c]==null){
+        fill(0, 255, 0, 100);
+      }else{
+        fill("#dc143c");
+      }
+      circle(c * TILE_SIZE + TILE_SIZE/2, r * TILE_SIZE + TILE_SIZE/2, TILE_SIZE/4);
+      
     }
   }
 }
