@@ -147,6 +147,22 @@ class Pezzo {
       }
 
     }
+
+    //mosse del re
+    if(this.tipo === RE) {
+      let mosseV = [[this.r+1, this.c],[this.r-1, this.c],
+                    [this.r, this.c+1],[this.r, this.c-1],
+                    [this.r+1, this.c+1],[this.r-1, this.c-1],
+                    [this.r+1, this.c-1],[this.r-1, this.c+1]];
+      for (let [x,y] of mosseV) {
+        if ((x >= 0 && x < DIM) && (y >= 0 && y < DIM)) {
+          let vittima = board[x][y];
+          if (vittima==null || vittima.colore!=this.colore) {
+            mosse.push([x, y]);
+          }
+        }
+      }
+    }
     return mosse;
   }
 }
