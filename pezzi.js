@@ -28,6 +28,15 @@ class Pezzo {
         mosse.push([nuovaR, this.c]);
         if(this.r === 1 && this.colore === "nero")mosse.push([nuovaR+1, this.c]);
         if(this.r === 6 && this.colore === "bianco")mosse.push([nuovaR-1, this.c]);
+        for (let dc of [-1, 1]) {
+          let nuovaC = this.c + dc;
+          if (nuovaR >= 0 && nuovaR < DIM && nuovaC >= 0 && nuovaC < DIM) {
+            let vittima = board[nuovaR][nuovaC];
+            if (vittima && vittima.colore !== this.colore) {
+              mosse.push([nuovaR, nuovaC]);
+            }
+          }
+        }
         console.log("mosse valide", mosse);
       }
     }
