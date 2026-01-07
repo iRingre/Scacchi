@@ -20,25 +20,36 @@ class Pezzo {
 
   mosseValide() {
     let mosse = [];
-    // Solo pedoni per ora
+    // Solo pedoni
     if (this.tipo === PEDONE) {
-      let dir = this.colore === "bianco" ? -1 : 1;
-      let nuovaR = this.r + dir;
-      if (nuovaR >= 0 && nuovaR < DIM && !board[nuovaR][this.c]) {
-        mosse.push([nuovaR, this.c]);
-        if(this.r === 1 && this.colore === "nero")mosse.push([nuovaR+1, this.c]);
-        if(this.r === 6 && this.colore === "bianco")mosse.push([nuovaR-1, this.c]);
-        for (let dc of [-1, 1]) {
-          let nuovaC = this.c + dc;
-          if (nuovaR >= 0 && nuovaR < DIM && nuovaC >= 0 && nuovaC < DIM) {
-            let vittima = board[nuovaR][nuovaC];
-            if (vittima && vittima.colore !== this.colore) {
-              mosse.push([nuovaR, nuovaC]);
-            }
-          }
-        }
-        console.log("mosse valide", mosse);
+    let dir = this.colore === "bianco" ? -1 : 1;
+    let startRow = this.colore === "bianco" ? 6 : 1;
+
+    let nuovaR = this.r + dir;
+    
+    if (nuovaR >= 0 && nuovaR < DIM && !board[nuovaR][this.c]) {
+      mosse.push([nuovaR, this.c]);
+
+      let doppiaR = this.r + dir * 2;
+      if (this.r === startRow && !board[doppiaR][this.c]) {
+        mosse.push([doppiaR, this.c]);
       }
+    }
+    for (let dc of [-1, 1]) {
+      let nuovaC = this.c + dc;
+
+      if (
+        nuovaR >= 0 && nuovaR < DIM &&
+        nuovaC >= 0 && nuovaC < DIM
+      ) {
+        let vittima = board[nuovaR][nuovaC];
+        if (vittima && vittima.colore !== this.colore) {
+          mosse.push([nuovaR, nuovaC]);
+        }
+      }
+    }
+
+    console.log("mosse valide", mosse);
     }
     if(this.tipo === CAVALLO) {
       let dirX = 2;
