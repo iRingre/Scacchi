@@ -1,7 +1,3 @@
-let board = [];
-const DIM = 8;
-const TILE_SIZE = 80;
-let selected = null;
 
 class Pezzo {
   constructor(tipo, colore, r, c) {
@@ -9,6 +5,22 @@ class Pezzo {
     this.colore = colore; // "bianco" o "nero"
     this.r = r;
     this.c = c;
+  }
+
+  getTipo(){
+    return this.tipo;
+  }
+
+  getColore(){
+    return this.colore;
+  }
+
+  getX(){
+    return this.c;
+  }
+
+  getY(){
+    return this.r;
   }
 
   disegna() {
@@ -184,5 +196,10 @@ class Pezzo {
       }
     }
     return mosse;
+  }
+
+  trasforma(){
+    inPromozione = true; 
+    pedoneDaPromuovere = this;
   }
 }
