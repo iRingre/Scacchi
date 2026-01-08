@@ -109,7 +109,6 @@ function mousePressed() {
         return;
       }
     }
-
     return;
   }
 
@@ -138,8 +137,6 @@ function mousePressed() {
 
 function drawPromozioneMenu() {
   fill(200);
-  stroke(0);
-  strokeWeight(2);
   rect(100, 200, 400, 150, 10);
 
   textAlign(CENTER, CENTER);
@@ -148,10 +145,6 @@ function drawPromozioneMenu() {
 
   for (let i = 0; i < trasforma.length; i++) {
     fill(colorPezzoMenu == "bianco" ? 255 : 0);
-    text(
-      trasforma[i],
-      150 + i * 100,
-      275
-    );
+    text(trasforma[i], 150 + i * 100, 275);
   }
 }
