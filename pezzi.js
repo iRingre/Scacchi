@@ -27,6 +27,8 @@ class Pezzo {
     textAlign(CENTER, CENTER);
     textSize(48);
     fill(this.colore === "bianco" ? 255 : 0);
+    strokeWeight(4);
+    stroke(this.colore==="bianco" ? 0 : 255);
     text(this.tipo, this.c * TILE_SIZE + TILE_SIZE/2, this.r * TILE_SIZE + TILE_SIZE/2);
   }
 

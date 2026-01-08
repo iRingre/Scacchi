@@ -58,8 +58,10 @@ function draw() {
   background(255);
   for (let r = 0; r < DIM; r++) {
     for (let c = 0; c < DIM; c++) {
-      if ((r + c) % 2 === 0) fill(200);
-      else fill(100);
+      if ((r + c) % 2 === 0) fill(245, 245, 220);
+      else fill(139, 69, 19);
+      strokeWeight(2);
+      stroke(0);
       rect(c * TILE_SIZE, r * TILE_SIZE, TILE_SIZE, TILE_SIZE);
 
       let pezzo = board[r][c];
@@ -87,6 +89,8 @@ function draw() {
       }else{
         fill("#dc143c");
       }
+      strokeWeight(1);
+      stroke(0);
       circle(c * TILE_SIZE + TILE_SIZE/2, r * TILE_SIZE + TILE_SIZE/2, TILE_SIZE/4);
       
     }
@@ -136,7 +140,7 @@ function mousePressed() {
 }
 
 function drawPromozioneMenu() {
-  fill(200);
+  fill(204,204,255);
   rect(100, 200, 400, 150, 10);
 
   textAlign(CENTER, CENTER);
@@ -144,7 +148,9 @@ function drawPromozioneMenu() {
 
 
   for (let i = 0; i < trasforma.length; i++) {
-    fill(colorPezzoMenu == "bianco" ? 255 : 0);
+    fill(colorPezzoMenu === "bianco" ? 255 : 0);
+    strokeWeight(1);
+    stroke(colorPezzoMenu==="bianco" ? 0 : 255);
     text(trasforma[i], 150 + i * 100, 275);
   }
 }
