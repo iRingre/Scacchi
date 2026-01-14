@@ -12,6 +12,7 @@ let trasforma = [CAVALLO, TORRE, ALFIERE, REGINA];
 let inPromozione = false;
 let pedoneDaPromuovere = null;
 let colorPezzoMenu = null;
+let mosseAttacco = [];
 
 function setup() {
   createCanvas(DIM * TILE_SIZE, DIM * TILE_SIZE);
@@ -87,7 +88,7 @@ function draw() {
       if(board[r][c]==null){
         fill(0, 255, 0, 100);
       }else{
-        fill("#dc143c");
+        fill("#e92e2e");
       }
       strokeWeight(1);
       stroke(0);
@@ -123,11 +124,11 @@ function mousePressed() {
   if (selected) {
     let mosse = selected.mosseValide();
     for (let [mr, mc] of mosse) {
-      console.log("madonna imboficiata ladra"+mr,mc)
       if (mr === r && mc === c) {
         board[selected.r][selected.c] = null;
         selected.r = r;
         selected.c = c;
+        selected.firstMove = true;
         board[r][c] = selected;
         selected = null;
         return;
@@ -136,6 +137,7 @@ function mousePressed() {
     selected = null;
   } else if (board[r][c]) {
     selected = board[r][c];
+    console.log(selected.firstMove+" selezionato il pezzo: "+selected.tipo+", "+selected.colore);
   }
 }
 

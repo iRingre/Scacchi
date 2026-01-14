@@ -5,6 +5,7 @@ class Pezzo {
     this.colore = colore; // "bianco" o "nero"
     this.r = r;
     this.c = c;
+    this.firstMove = false;
   }
 
   getTipo(){
@@ -63,7 +64,7 @@ class Pezzo {
       }
     }
 
-    console.log("mosse valide", mosse);
+
     }
     if(this.tipo === CAVALLO) {
       let dirX = 2;
@@ -188,6 +189,7 @@ class Pezzo {
                     [this.r, this.c+1],[this.r, this.c-1],
                     [this.r+1, this.c+1],[this.r-1, this.c-1],
                     [this.r+1, this.c-1],[this.r-1, this.c+1]];
+      //this.arrocco(mosseV);
       for (let [x,y] of mosseV) {
         if ((x >= 0 && x < DIM) && (y >= 0 && y < DIM)) {
           let vittima = board[x][y];
@@ -196,9 +198,48 @@ class Pezzo {
           }
         }
       }
+      
     }
     return mosse;
   }
+
+  arrocco(mosseV){
+    if(!this.firstMove){
+      let Torre1 = board[this.r][0];
+      var Torre2 = board[this.r][7];
+      console.log("entrato nella funzione arrocco per torre: "+Torre1.r+" "+Torre1.c);
+      if (Torre1 === TORRE && !Torre1.firstMove){
+        for (let i = Torre1.c+1; i< this.c; i++){
+          if(board[this.r][i].IsAttached(this.colore)){
+            console.log(" CASELLA TORRE SINISTRA SOTTO ATTACCO");
+          }
+        }
+      }
+      if (Torre2 === TORRE && !Torre2.firstMove){
+        for (let i = this.c; i< Torre2.c; i++){
+
+        }
+      }
+    }
+  }
+
+  IsAttached(attaccato){
+    mosseAttacco = [];
+    for (let x = 0; x<DIM; x++){
+      for (let y =0; y< DIM; y++){
+        if (board[x][y]!=null && board[x][y].colore!=attaccato){
+          mosseAttacco[y],push(board[x][y].mosseValide());
+        }
+      }
+    }
+    for(let x of mosseAttacco){
+      for (let [r,c] of x){
+        if(this.r == r && this.c == c)return true;
+      }
+    }
+    return false;
+  }
+
 
   trasforma(){
     inPromozione = true; 
