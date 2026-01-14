@@ -120,7 +120,7 @@ function mousePressed() {
   let c = floor(mouseX / TILE_SIZE);
   let r = floor(mouseY / TILE_SIZE);
   if (c < 0 || c >= DIM || r < 0 || r >= DIM) return;
-  console.log("pos x e y del mouse:"+c+", "+r);
+  console.log("pos x e y del mouse:"+r+", "+c);
   if (selected) {
     let mosse = selected.mosseValide();
     for (let [mr, mc] of mosse) {

@@ -205,13 +205,14 @@ class Pezzo {
 
   arrocco(mosseV){
     if(!this.firstMove){
-      let Torre1 = board[this.r][0];
+      var Torre1 = board[this.r][0];
       var Torre2 = board[this.r][7];
-      console.log("entrato nella funzione arrocco per torre: "+Torre1.r+" "+Torre1.c);
-      if (Torre1 === TORRE && !Torre1.firstMove){
+      if (Torre1.tipo == TORRE && Torre1.firstMove == false){
+        console.log("entrato nella funzione arrocco per torre: "+Torre1.r+" "+Torre1.c);
         for (let i = Torre1.c+1; i< this.c; i++){
-          if(board[this.r][i].IsAttached(this.colore)){
+          if(this.IsAttached(this.colore, this.r, i)){
             console.log(" CASELLA TORRE SINISTRA SOTTO ATTACCO");
+            return true;
           }
         }
       }
@@ -221,20 +222,26 @@ class Pezzo {
         }
       }
     }
+    return false;
   }
 
-  IsAttached(attaccato){
-    mosseAttacco = [];
+  IsAttached(attaccato, l,f){
     for (let x = 0; x<DIM; x++){
       for (let y =0; y< DIM; y++){
-        if (board[x][y]!=null && board[x][y].colore!=attaccato){
-          mosseAttacco[y],push(board[x][y].mosseValide());
+        let mosseSottoattacco = [];
+        let pr = board[x][y]!=null && board[x][y].colore!=attaccato && board[x][y].tipo != RE;
+       // console.log("stampa del dopo if: "+pr+" pezzo : "+board[x][y].tipo+" colore: "+board[x][y].colore);
+        if (board[x][y]!=null && board[x][y].colore!=attaccato && board[x][y].tipo != RE){
+          console.log("stampa del dopo if: "+pr+" pezzo : "+board[x][y].tipo+" colore: "+board[x][y].colore);
+          mosseSottoattacco.push(board[x][y].mosseValide());
+          console.log(mosseSottoattacco);
+          for(let x of mosseAttacco){
+            for (let [r,c] of x){
+              console.log("attacco rilevato in casella");
+              if(l == r && f == c)return true;
+            }
+          }
         }
-      }
-    }
-    for(let x of mosseAttacco){
-      for (let [r,c] of x){
-        if(this.r == r && this.c == c)return true;
       }
     }
     return false;
