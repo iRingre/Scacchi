@@ -208,11 +208,10 @@ class Pezzo {
       var Torre1 = board[this.r][0];
       var Torre2 = board[this.r][7];
       if (Torre1.tipo == TORRE && !Torre1.firstMove && !IsAttached(Torre1.colore, Torre1.r, Torre1.c)){
-        console.log("entrato nella funzione arrocco per torre: "+Torre1.r+" "+Torre1.c);
         for (let i = Torre1.c+1; i< this.c; i++){
           console.log("controllo casella "+this.r+", "+i);
-          if(board[this.r][i] == null && IsAttached(this.colore, this.r, i)){
-            console.log(" NON PUOI FARE ARROCCO A SINISTRA (CASELLA OCCUPATA O ATTACCATA) "+this.r+" "+i);
+          if(board[this.r][i] == null && !IsAttached(this.colore, this.r, i)){
+            console.log(" PUOI FARE ARROCCO A SINISTRA (CASELLA NON OCCUPATA O ATTACCATA) "+this.r+" "+i);
             //return true;
           }
         }
@@ -220,8 +219,8 @@ class Pezzo {
       if (Torre2.tipo === TORRE && !Torre2.firstMove && !IsAttached(Torre2.colore, Torre2.r, Torre2.c)){
         for (let i = this.c+1; i< Torre2.c; i++){
           console.log("controllo casella "+this.r+", "+i);
-          if(board[this.r][i] == null && IsAttached(this.colore, this.r, i)){
-            console.log("NON PUOI FARE ARROCCO A DESTRA (CASELLA OCCUPATA O ATTACCATA) "+this.r+" "+i);
+          if(board[this.r][i] == null && !IsAttached(this.colore, this.r, i)){
+            console.log("PUOI FARE ARROCCO A DESTRA (CASELLA NON OCCUPATA O ATTACCATA) "+this.r+" "+i);
             //return true;
           }
         }
