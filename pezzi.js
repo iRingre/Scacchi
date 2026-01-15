@@ -189,7 +189,7 @@ class Pezzo {
                     [this.r, this.c+1],[this.r, this.c-1],
                     [this.r+1, this.c+1],[this.r-1, this.c-1],
                     [this.r+1, this.c-1],[this.r-1, this.c+1]];
-      //this.arrocco(mosseV);
+      this.arrocco(mosseV);
       for (let [x,y] of mosseV) {
         if ((x >= 0 && x < DIM) && (y >= 0 && y < DIM)) {
           let vittima = board[x][y];
@@ -207,39 +207,40 @@ class Pezzo {
     if(!this.firstMove){
       var Torre1 = board[this.r][0];
       var Torre2 = board[this.r][7];
-      if (Torre1.tipo == TORRE && Torre1.firstMove == false){
+      if (Torre1.tipo == TORRE && !Torre1.firstMove){
         console.log("entrato nella funzione arrocco per torre: "+Torre1.r+" "+Torre1.c);
         for (let i = Torre1.c+1; i< this.c; i++){
+          console.log("controllo casella "+this.r+", "+i);
           if(this.IsAttached(this.colore, this.r, i)){
-            console.log(" CASELLA TORRE SINISTRA SOTTO ATTACCO");
-            return true;
+            console.log(" CASELLA TORRE SINISTRA SOTTO ATTACCO "+this.r+" "+i);
+            //return true;
           }
         }
       }
-      if (Torre2 === TORRE && !Torre2.firstMove){
-        for (let i = this.c; i< Torre2.c; i++){
-
+      if (Torre2.tipo === TORRE && !Torre2.firstMove){
+        for (let i = this.c+1; i< Torre2.c; i++){
+          if(this.IsAttached(this.colore, this.r, i)){
+            console.log(" CASELLA TORRE DESTRA SOTTO ATTACCO "+this.r+" "+i);
+            return true;
+          }
         }
       }
     }
     return false;
   }
 
-  IsAttached(attaccato, l,f){
+  IsAttached(attaccato, l, f){
     for (let x = 0; x<DIM; x++){
       for (let y =0; y< DIM; y++){
-        let mosseSottoattacco = [];
         let pr = board[x][y]!=null && board[x][y].colore!=attaccato && board[x][y].tipo != RE;
        // console.log("stampa del dopo if: "+pr+" pezzo : "+board[x][y].tipo+" colore: "+board[x][y].colore);
         if (board[x][y]!=null && board[x][y].colore!=attaccato && board[x][y].tipo != RE){
           console.log("stampa del dopo if: "+pr+" pezzo : "+board[x][y].tipo+" colore: "+board[x][y].colore);
-          mosseSottoattacco.push(board[x][y].mosseValide());
+          let mosseSottoattacco = board[x][y].mosseValide();
           console.log(mosseSottoattacco);
-          for(let x of mosseAttacco){
-            for (let [r,c] of x){
-              console.log("attacco rilevato in casella");
-              if(l == r && f == c)return true;
-            }
+          for(let [b, a] of mosseSottoattacco){
+            //console.log("attacco rilevato in casella "+b+", "+a);
+            if(b == l &&  a == f)return true;
           }
         }
       }
