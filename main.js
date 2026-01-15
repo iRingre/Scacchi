@@ -13,6 +13,7 @@ let inPromozione = false;
 let pedoneDaPromuovere = null;
 let colorPezzoMenu = null;
 let mosseAttacco = [];
+let turno ="bianco";
 
 function setup() {
   createCanvas(DIM * TILE_SIZE, DIM * TILE_SIZE);
@@ -131,11 +132,12 @@ function mousePressed() {
         selected.firstMove = true;
         board[r][c] = selected;
         selected = null;
+        turno = turno === "bianco" ? "nero" : "bianco";
         return;
       }
     }
     selected = null;
-  } else if (board[r][c]) {
+  } else if (board[r][c]!=null && board[r][c].colore == turno) {
     selected = board[r][c];
     console.log(selected.firstMove+" selezionato il pezzo: "+selected.tipo+", "+selected.colore);
   }
