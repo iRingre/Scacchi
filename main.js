@@ -156,3 +156,20 @@ function drawPromozioneMenu() {
     text(trasforma[i], 150 + i * 100, 275);
   }
 }
+
+function IsAttached(attaccato, l, f){
+    for (let x = 0; x<DIM; x++){
+      for (let y =0; y< DIM; y++){
+        let pr = board[x][y]!=null && board[x][y].colore!=attaccato && board[x][y].tipo != RE;
+        if (board[x][y]!=null && board[x][y].colore!=attaccato && board[x][y].tipo != RE){
+          //console.log("stampa del dopo if: "+pr+" pezzo : "+board[x][y].tipo+" colore: "+board[x][y].colore);
+          let mosseSottoattacco = board[x][y].mosseValide();
+          //console.log(mosseSottoattacco);
+          for(let [b, a] of mosseSottoattacco){
+            if(b == l &&  a == f)return true;
+          }
+        }
+      }
+    }
+    return false;
+  }
