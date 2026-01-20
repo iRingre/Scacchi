@@ -107,8 +107,9 @@ function mousePressed() {
       let y = 275;
 
       if (dist(mouseX, mouseY, x, y) < 40) {
-        let p = pedoneDaPromuovere;
-        board[p.r][p.c] = new Pezzo(trasforma[i], p.colore, p.r, p.c);
+        pedoneDaPromuovere.tipo = trasforma[i];
+        //let p = pedoneDaPromuovere;
+        //board[p.r][p.c] = new Pezzo(trasforma[i], p.colore, p.r, p.c);
 
         inPromozione = false;
         pedoneDaPromuovere = null;
@@ -160,15 +161,15 @@ function drawPromozioneMenu() {
 }
 
 function IsAttached(attaccato, l, f){
-    for (let x = 0; x<DIM; x++){
-      for (let y =0; y< DIM; y++){
-        if (board[x][y]!=null && board[x][y].colore!=attaccato && board[x][y].tipo != RE){
-          let mosseSottoattacco = board[x][y].mosseValide();
-          for(let [b, a] of mosseSottoattacco){
-            if(b == l &&  a == f)return true;
-          }
+  for (let x = 0; x<DIM; x++){
+    for (let y =0; y< DIM; y++){
+      if (board[x][y]!=null && board[x][y].colore!=attaccato && board[x][y].tipo != RE){
+        let mosseSottoattacco = board[x][y].mosseValide();
+        for(let [b, a] of mosseSottoattacco){
+          if(b == l &&  a == f)return true;
         }
       }
     }
-    return false;
   }
+  return false;
+}

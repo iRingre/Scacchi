@@ -198,7 +198,6 @@ class Pezzo {
           }
         }
       }
-      
     }
     return mosse;
   }
